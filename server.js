@@ -49,26 +49,6 @@ app.post('/addbook', async (req, res) => {
   }
 });
 
-// View Book as PDF in Online
-
-app.get('/view/:id/pdf', async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const book = await Book.findById(id);
-    if (!book) {
-      return res.status(404).json({ message: 'Book not found' });
-    }
-
-    // Set headers for inline PDF viewing
-    res.set('Content-Type', 'application/pdf');
-    res.set('Content-Disposition', 'inline; filename="book.pdf"'); // Optional filename
-    res.send(book.pdf); // Send binary data
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error fetching PDF', error });
-  }
-});
 
 
 app.post('/register', async (req, res) => {
